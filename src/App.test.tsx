@@ -1,9 +1,12 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import '@testing-library/jest-dom';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import { render, screen } from "@testing-library/react";
+
+import React from "react";
+import Show from "./Show";
+
+test("renders learn react link", () => {
+  render(<Show />);
+  const headingElement = screen.getByRole("heading");
+  expect(headingElement).toHaveTextContent(/This is it/i);
 });
