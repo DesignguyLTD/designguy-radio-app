@@ -147,3 +147,9 @@ label:nth-child(3) {
     color: rgba(81, 84, 88, 1);
     cursor: pointer;
 }
+
+@media (max-width: 860px){
+    body{
+        display: none;
+    }
+}
