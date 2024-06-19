@@ -1,11 +1,21 @@
-import React from 'react';
-import './App.css';
+import "./App.css";
+
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
+import Login from "./Components/Login";
+import SignUp from "./Components/SignUp";
 
 function App() {
   return (
-    <div className="App">
-      designguy-radio-app seyi
-    </div>
+    <>
+      <Router basename="/designguy-radio-app">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+        </Routes>
+      </Router>
+    </>
+
   );
 }
 

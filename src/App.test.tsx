@@ -1,11 +1,13 @@
-import { render, screen } from '@testing-library/react';
-import {act} from 'react';
-import App from './App';
 import '@testing-library/jest-dom';
 
-test('renders learn react link', async () => {
-  await act(async () => {
-    render(<App />);
-  });
-  expect(screen.getByText("designguy-radio-app gnfbufgnk")).toBeInTheDocument();
+import { render, screen } from "@testing-library/react";
+
+import React from "react";
+import Show from "./Show";
+
+test("renders learn react link", () => {
+  render(<Show />);
+  const headingElement = screen.getByRole("heading");
+  expect(headingElement).toHaveTextContent(/This is it/i);
+
 });
