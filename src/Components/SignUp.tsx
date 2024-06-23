@@ -156,7 +156,7 @@ const SignUp: React.FC = () => {
               </div>
               <div>
                 <p className={style["extra-text"]}>
-                  By signing in, you agree to OPMENTEK's
+                  By signing in, you agree to DesignGuy Radio
                 </p>
                 <p className={style["extra-text2"]}>Terms and Conditions</p>
               </div>
