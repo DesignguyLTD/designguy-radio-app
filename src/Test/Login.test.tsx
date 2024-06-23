@@ -1,21 +1,20 @@
 import "@testing-library/jest-dom";
 
-import React, { FormEvent, act } from "react";
+import { FormEvent, act } from "react";
 import { render, renderHook, screen, waitFor } from "@testing-library/react";
 
+import Login from "../Components/Login";
 import { BrowserRouter as Router } from "react-router-dom";
-import SignUp from "../Components/SignUp";
-import { useValidation } from "../Components/SignUp";
+import { useValid } from "../Components/Login";
 import userEvent from "@testing-library/user-event";
 
-describe("Testing the sign-up feature", () => {
-  test("Rendering of the fields", () => {
+describe("This is to test the login page", () => {
+  it("Rending the fields in the document", () => {
     render(
       <Router>
-        <SignUp />
+        <Login />
       </Router>
     );
-
     expect(screen.getByLabelText(/User name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
   });
@@ -23,7 +22,7 @@ describe("Testing the sign-up feature", () => {
   test("Testing for the input in the fields", () => {
     render(
       <Router>
-        <SignUp />
+        <Login />
       </Router>
     );
 
@@ -39,11 +38,8 @@ describe("Testing the sign-up feature", () => {
     expect(passwordInput).toHaveValue("string");
   });
 
-  // This is a test for the name field
-  // ---------------------------------------------------------
-
   test("The name field validation", async () => {
-    const { result } = renderHook(() => useValidation());
+    const { result } = renderHook(() => useValid());
 
     act(() => {
       result.current.setName("John");
@@ -86,11 +82,8 @@ describe("Testing the sign-up feature", () => {
     });
   });
 
-  // This is a test for the password field
-
-  // ------------------------------------------------------------
   test("Validating Password", async () => {
-    const { result } = renderHook(() => useValidation());
+    const { result } = renderHook(() => useValid());
 
     act(() => {
       result.current.setPassword("password");
@@ -122,11 +115,9 @@ describe("Testing the sign-up feature", () => {
       expect(result.current.error1).toBe("");
     });
   });
-  // This is for validating the entire form
 
-  // --------------------------------------------
   test("Validating the form", async () => {
-    const { result } = renderHook(() => useValidation());
+    const { result } = renderHook(() => useValid());
 
     act(() => {
       result.current.setName("John");
@@ -187,7 +178,7 @@ describe("Testing the sign-up feature", () => {
   });
 
   test("handles form submission correctly", async () => {
-    const { result } = renderHook(() => useValidation());
+    const { result } = renderHook(() => useValid());
 
     const mockEvent: any = {
       preventDefault: jest.fn(),
