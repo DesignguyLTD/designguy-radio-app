@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/designguy-radio-app/static/css/main.05f8727d.css",
-    "main.js": "/designguy-radio-app/static/js/main.a38b18aa.js",
+    "main.css": "/designguy-radio-app/static/css/main.58b70657.css",
+    "main.js": "/designguy-radio-app/static/js/main.afe0fa0c.js",
     "static/js/453.b507a2e2.chunk.js": "/designguy-radio-app/static/js/453.b507a2e2.chunk.js",
     "index.html": "/designguy-radio-app/index.html",
     "static/media/line.svg": "/designguy-radio-app/static/media/line.98f2e742fbeb64971d17bb4e1f99949e.svg",
-    "main.05f8727d.css.map": "/designguy-radio-app/static/css/main.05f8727d.css.map",
-    "main.a38b18aa.js.map": "/designguy-radio-app/static/js/main.a38b18aa.js.map",
+    "main.58b70657.css.map": "/designguy-radio-app/static/css/main.58b70657.css.map",
+    "main.afe0fa0c.js.map": "/designguy-radio-app/static/js/main.afe0fa0c.js.map",
     "453.b507a2e2.chunk.js.map": "/designguy-radio-app/static/js/453.b507a2e2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.05f8727d.css",
-    "static/js/main.a38b18aa.js"
+    "static/css/main.58b70657.css",
+    "static/js/main.afe0fa0c.js"
   ]
 }
