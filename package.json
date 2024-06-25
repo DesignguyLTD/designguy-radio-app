@@ -2,7 +2,7 @@
   "name": "designguy-radio-app",
   "version": "0.1.0",
   "private": false,
-  "homepage": "designguy-radio-app",
+  "homepage": "https://DesignguyLTD.github.io/designguy-radio-app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -45,6 +45,11 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-typescript": "^7.24.7",
+    "@jest/globals": "^29.7.0",
+    "gh-pages": "^6.1.1",
+    "jest": "^27.5.1",
+    "react-router-dom": "^6.23.1"
   }
 }
