@@ -46,7 +46,7 @@ export default function SignUp() {
                 <p className={style.create}>
                   Already have an account? &nbsp;
                   <span className={style["span-create"]}>
-                    <Link style={{ textDecoration: "none" }} to="/">
+                    <Link style={{ textDecoration: "none" }} to="/Login">
                       Log in
                     </Link>
                   </span>
