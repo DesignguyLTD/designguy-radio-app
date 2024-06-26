@@ -3,7 +3,9 @@ import "./App.css";
 import Navbar from "./Components/navbar/Navbar";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
+import Search from "./Components/Search";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import style from "./CSSModules/Search.module.css";
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
         </Routes>
       </Router>
+      <Search />
     </div>
   );
 }

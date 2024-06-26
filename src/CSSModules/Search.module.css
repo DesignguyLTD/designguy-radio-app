@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.searchCtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    margin: auto;
+    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.inputBtnCtn {
+    display: flex;
+    background: white;
+    border-radius: 5px;
+
+}
+.textInput {
+    border: none;
+    padding: 20px;
+    width: 350px;
+    height: 5px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-weight: light;
+    background: white;
+}
+
+.btn {
+    background: #C9D6E8;
+    width: 30px;
+    height: 30px;
+    margin: 7px;
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    
+}
+
+.dropdown {
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    width: 250px;
+    margin-top: 10px;
+}
+
+.dropdownList {
+    padding: 10px 0px 10px 5px;
+    margin: 3px 0px 3px 0px;
+    border-radius: 5px;
+    text-align: left;
+    width: 238px;
+    background: #EDF4FD;
+    color: #2B65B4;
+    font-size: 14px;
+    cursor: pointer;
+}
