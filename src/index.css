@@ -12,3 +12,23 @@ code {
     monospace;
 }
 
+.showDesk{
+  display: none;
+}
+
+.showMobile {
+  text-align: center;
+  display: block;
+  margin: 10px auto;
+}
+
+
+@media (min-width: 860px) {
+  .showMobile {
+    display: none;
+  }
+
+  .showDesk{
+    display: block;
+  }
+}
