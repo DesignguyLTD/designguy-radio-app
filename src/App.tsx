@@ -32,7 +32,7 @@ function App() {
 
         try {
             const decodedToken = JSON.parse(atob(accessToken.split('.')[1]));
-            const expirationTime = decodedToken.exp * 1000; // Convert to milliseconds
+            const expirationTime = decodedToken.exp * 1000;
             return Date.now() < expirationTime;
         } catch (error) {
             console.error("Error decoding/accessing token:", error);
