@@ -14,6 +14,7 @@ import Home from "./Pages/home";
 import Login from "./Components/Login";
 import Radio from "./Components/Radio";
 import SignUp from "./Components/SignUp";
+import RadioPlayer from "./playground/play";
 
 console.log = function no_console() {};
 
@@ -49,7 +50,6 @@ function App() {
     }
   }, [accessToken, isLoggedIn]);
 
-<<<<<<< HEAD
   return (
     <Router basename="/designguy-radio-app">
       <Routes>
@@ -72,32 +72,10 @@ function App() {
           }
         />
         <Route path="/play" element={<Radio />} />
+        <Route path="/test" element={<RadioPlayer streamUrl={'http://radio.garden/api/ara/content/listen/jPnfeQF3/channel.mp3'} />} />
       </Routes>
     </Router>
   );
-=======
-        try {
-            const decodedToken = JSON.parse(atob(accessToken.split('.')[1]));
-            const expirationTime = decodedToken.exp * 1000;
-            return Date.now() < expirationTime;
-        } catch (error) {
-            console.error("Error decoding/accessing token:", error);
-            return false;
-        }
-    }, [accessToken, isLoggedIn]);
-
-    return (
-        <Router basename="/designguy-radio-app">
-
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="*" element={<div>404, Go back to <Link to='/'>HomePage</Link> </div>} />
-                <Route path="/" element={<ProtectedRoute isLoggedIn={isLoggedIn && isTokenValid}><Home /></ProtectedRoute>} />
-            </Routes>
-        </Router>
-    );
->>>>>>> 5e4a38b9138b0fbda316eb07768e097313ed0ba1
 }
 
 export default App;

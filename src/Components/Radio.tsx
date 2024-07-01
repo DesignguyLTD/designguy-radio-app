@@ -48,7 +48,7 @@ export default function Radio() {
             hit._source.stream ? `${BASEURL}${hit._source.url}` : null
           )
           .filter((url): url is string => url !== null);
-        console.log(links);
+        console.log(links, 'links');
         setRadioLinks(links);
         if (links.length > 0) {
           loadAudio(links[0]);
