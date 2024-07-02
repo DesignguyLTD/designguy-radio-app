@@ -15,7 +15,7 @@ import Search from "./Components/Search";
 import Navbar from "./Components/navbar/Navbar";
 import "./App.css";
 
-console.log = function no_console() {};
+// console.log = function no_console() {};
 
 const ProtectedRoute = ({
   isLoggedIn,
@@ -51,8 +51,8 @@ function App() {
 
   return (
     <>
-      <Navbar />
       <Router basename="/designguy-radio-app">
+          <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

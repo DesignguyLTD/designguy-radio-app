@@ -1,51 +1,46 @@
 import React, { ChangeEvent, useState } from "react";
 import styles from "../CSSModules/Search.module.css";
 import { FaSearch } from "react-icons/fa";
+import axios from "axios";
+
+interface searchItem {
+  _id: string;
+  _score: number;
+  _source: {
+    code: string;
+    subtitle: string;
+    type: string;
+    title: string;
+    url: string;
+  }
+}
 
 const Search: React.FC = () => {
   const [dropdown, setDropdown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [searchRadio, setSearchRadio] = useState([
-    {
-      _id: "602749",
-      _score: 165.90909,
-      _source: {
-        code: "US",
-        subtitle: "Austin TX, United States",
-        type: "channel",
-        title: "KUTX FM 98.9",
-        url: "/listen/kutx-98-9/vbFsCngB",
-      },
-    },
-    {
-      _id: "602748",
-      _score: 165.90909,
-      _source: {
-        code: "US",
-        subtitle: "Austin TX, United States",
-        type: "channel",
-        title: "KUTX FM 98.9",
-        url: "/listen/kutx-98-9/vbFsCngB",
-      },
-    },
-  ]);
+  const [searchRadio, setSearchRadio] = useState<searchItem[]>([]);
 
-  const searchQuery = (query: string) =>{
-    
-  }
-  
-  const handleFocus = () => {
-    if (searchInput !== "") {
-      setDropdown(true);
-    }
+  const searchQuery = (query: string) => {
+    const baseUrl = "http://radio.garden/api";
+    axios
+      .get(`${baseUrl}/search?q=${query}`)
+      .then((response) => console.log(response.data))
+      .catch((err) => console.log(err));
   };
 
-  const handleBlur = () => {
-    setDropdown(false);
-  };
+  // const handleFocus = () => {
+  //   if (searchInput !== "") {
+  //     setDropdown(true);
+  //   }
+  // };
+
+  // const handleBlur = () => {
+  //   setDropdown(false);
+  // };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    searchQuery(value)
     setSearchInput(value);
     if (dropdown === false) {
       setDropdown(true);
@@ -59,9 +54,9 @@ const Search: React.FC = () => {
           type="text"
           placeholder="Search countries, places and radio stations"
           className={styles.textInput}
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
           onChange={handleChange}
-          onFocus={handleFocus}
+          // onFocus={handleFocus}
         />
         <button type="submit" className={styles.btn}>
           <FaSearch />

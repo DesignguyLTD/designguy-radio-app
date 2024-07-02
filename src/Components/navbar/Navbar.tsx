@@ -8,10 +8,10 @@ const Navbar: React.FC = () => {
       <div>
         <p className={styles.p}>DesignGuy Radio</p>
       </div>
-      <ul className={styles.ul}>
+    <ul className={styles.ul}>
         <li className={styles.li}>
           <NavLink
-            to="/About"
+            to="/about"
             className={({ isActive }) =>
               isActive ? `${styles.link} ${styles.activeLink}` : styles.link
             }
@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
         </li>
         <li className={styles.li}>
           <NavLink
-            to="/Projects"
+            to="/projects"
             className={({ isActive }) =>
               isActive ? `${styles.link} ${styles.activeLink}` : styles.link
             }
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
         </li>
         <li className={styles.li}>
           <NavLink
-            to="/Insights"
+            to="/insights"
             className={({ isActive }) =>
               isActive ? `${styles.link} ${styles.activeLink}` : styles.link
             }
@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
         </li>
         <li className={styles.li}>
           <NavLink
-            to="/Locations"
+            to="/locations"
             className={({ isActive }) =>
               isActive ? `${styles.link} ${styles.activeLink}` : styles.link
             }
@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
       </ul>
       <ul className={styles.signCtn}>
         <li>
-          <NavLink to="/Login">
+          <NavLink to="/login">
             <input
               type="button"
               value="Sign In"
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/SignUp">
+          <NavLink to="/signUp">
             <input
               type="button"
               value="Sign Up"
