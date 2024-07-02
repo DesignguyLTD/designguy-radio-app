@@ -13,8 +13,8 @@ import { AuthContext } from "./Contexts/authContext";
 import Home from "./Pages/home";
 import Login from "./Components/Login";
 import Radio from "./Components/Radio";
-import SignUp from "./Components/SignUp";
 import RadioPlayer from "./playground/play";
+import SignUp from "./Components/SignUp";
 
 console.log = function no_console() {};
 
@@ -72,7 +72,16 @@ function App() {
           }
         />
         <Route path="/play" element={<Radio />} />
-        <Route path="/test" element={<RadioPlayer streamUrl={'http://radio.garden/api/ara/content/listen/jPnfeQF3/channel.mp3'} />} />
+        <Route
+          path="/test"
+          element={
+            <RadioPlayer
+              streamUrl={
+                "http://radio.garden/api/ara/content/listen/MXOK6VOX/channel.mp3"
+              }
+            />
+          }
+        />
       </Routes>
     </Router>
   );

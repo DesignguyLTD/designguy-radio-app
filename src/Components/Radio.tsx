@@ -1,67 +1,55 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import "react-h5-audio-player/lib/styles.css";
 
+import { useEffect, useState } from "react";
+
+import AudioPlayer from "react-h5-audio-player";
 import { Response } from "../Contexts/Types";
 import { dummy } from "./Dummy";
 
 export default function Radio() {
-  let BASEURL = "https://radio.garden";
+  let BASEURL = "https://radio.garden/api/ara/content/listen/";
 
   const [data, setData] = useState<Response | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  let audioRef = useRef<HTMLAudioElement>(new Audio());
   const [currentRadio, setCurrentRadio] = useState<number>(0);
-  const [radioPlaying, setRadioPlaying] = useState<boolean>(false);
   const [radioLinks, setRadioLinks] = useState<string[]>([]);
-
-  const loadAudio = useCallback((url: string) => {
-    const audio = audioRef.current;
-    audio.src = url;
-
-    console.log("Loading audio site:", url);
-
-    audio.addEventListener("error", (e) => {
-      console.error("Error loading audio", e);
-      setError("Failed to load audio");
-    });
-
-    audio.addEventListener("loaded audio", () => {
-      console.log("Audio loaded");
-    });
-
-    try {
-      audio.load(); // Attempt to load the audio
-    } catch (err) {
-      console.error("Error loading audio:", err);
-      setError("Failed to load audio");
-      // Handle loading errors gracefully (e.g., display an error message)
-    }
-  }, []);
 
   useEffect(() => {
     const loadData = async () => {
       try {
         const response = dummy as Response;
+        console.log("Fetched data:", response);
         setData(response);
         const links = response.hits.hits
-          .map((hit) =>
-            hit._source.stream ? `${BASEURL}${hit._source.url}` : null
-          )
+          .map((hit) => {
+            console.log("Processing hit:", hit);
+            const stream = hit._source.stream;
+            const url = hit._source.url;
+            const id = url.split("/").pop(); // Extract the ID from the URL
+            const fullUrl = stream ? `${BASEURL}${id}/channel.mp3` : null; // Construct the new URL
+            console.log("Base URL:", BASEURL);
+            console.log("Stream URL:", url);
+            console.log("ID:", id);
+            console.log("Full URL:", fullUrl);
+            return fullUrl;
+          })
           .filter((url): url is string => url !== null);
-        console.log(links, 'links');
+
+        console.log("Generated links:", links);
         setRadioLinks(links);
         if (links.length > 0) {
-          loadAudio(links[0]);
+          setCurrentRadio(0); // Set the initial radio station
         }
       } catch (err) {
+        console.error("Failed to load data:", err);
         setError("Failed to load data");
       } finally {
         setLoading(false);
       }
     };
-    console.log("This works");
     loadData();
-  }, [BASEURL, loadAudio]);
+  }, [BASEURL]);
 
   if (loading) {
     return <> Loading...</>;
@@ -70,74 +58,48 @@ export default function Radio() {
   if (error) {
     return <> Error: {error}</>;
   }
-
-  const playAudio = () => {
-    const audio = audioRef.current;
-    if (audio.src) {
-      console.log("This is playing");
-      audio.play().catch((err) => {
-        console.error("Error playing the audio", err);
-      });
-
-      setRadioPlaying(true);
-    } else {
-      setError("No Audio source available");
-      console.log(error);
-    }
-  };
-
-  const pauseAudio = () => {
-    const audio = audioRef.current;
-    audio.pause();
-    setRadioPlaying(false);
-  };
-
-  const playHandler = () => {
-    if (radioPlaying) {
-      pauseAudio();
-    } else {
-      playAudio();
-    }
-  };
+  const currentUrl = radioLinks[currentRadio];
 
   const forwardHandler = () => {
     if (currentRadio < radioLinks.length - 1) {
-      const nextRadio = currentRadio + 1;
-      setCurrentRadio(nextRadio);
-      loadAudio(radioLinks[nextRadio]);
-
-      if (radioPlaying) {
-        playAudio();
-      }
+      setCurrentRadio(currentRadio + 1);
     }
   };
 
   const backwardHandler = () => {
     if (currentRadio > 0) {
-      const prevRadio = currentRadio - 1;
-      setCurrentRadio(prevRadio);
-      loadAudio(radioLinks[prevRadio]);
-      if (radioPlaying) {
-        playAudio();
-      }
+      setCurrentRadio(currentRadio - 1);
     }
   };
 
   return (
     <div>
-      <p> {data?.hits.hits[0]._source.title} </p>
-      <p>{data?.hits.hits[0]._id}</p>
+      <p> {data?.hits.hits[currentRadio]._source.title} </p>
       <div>
-        <button id="backward" onClick={backwardHandler}>
+        <button
+          id="backward"
+          onClick={backwardHandler}
+          disabled={currentRadio === 0}>
           Backward
         </button>
-        <button onClick={playHandler} id="play-pause">
-          Play/Pause
-        </button>
-        <button onClick={forwardHandler} id="forward">
+        <button
+          onClick={forwardHandler}
+          id="forward"
+          disabled={currentRadio === radioLinks.length - 1}>
           Forward
         </button>
       </div>
+      {currentUrl && (
+        <AudioPlayer
+          autoPlay
+          src={currentUrl}
+          onPlay={(e) => console.log("Playing")}
+          onError={(e) => {
+            console.error("Error playing audio", e);
+            setError("Failed to load audio");
+          }}
+        />
+      )}
     </div>
   );
 }

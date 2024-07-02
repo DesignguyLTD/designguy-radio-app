@@ -1,7 +1,8 @@
-// src/RadioPlayer.tsx
-import React, { useRef, useState, useEffect } from 'react';
-import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+
+import AudioPlayer from 'react-h5-audio-player';
+// src/RadioPlayer.tsx
+import React from 'react';
 
 interface RadioPlayerProps {
     streamUrl: string;
