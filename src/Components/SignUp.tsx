@@ -1,38 +1,48 @@
 import React, { useState } from "react";
+import {
+  doCreateUserWithEmailAndPassword,
+  doSendEmailVerification,
+} from "../Auth/Auth";
 
 import { Link } from "react-router-dom";
+import Modal from "./modal";
 import line from "../Images/line.svg";
 import style from "../CSSModules/Login.module.css";
-import {doCreateUserWithEmailAndPassword, doSendEmailVerification} from "../Auth/Auth";
-import Modal from "./modal";
 
 const useValidation = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
   const [error1, setError1] = useState<string>("");
   const [message, setMessage] = useState<string>("");
-  const [loading, setLoading] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const validateName = (value: string) => {
     if (value === "") {
       setError("Email cannot be left blank");
       return false;
-    }else {
+    } else {
       setError("");
       return true;
     }
   };
 
   const validatePassword = (value: string) => {
+    const specialCharacters = /[!@#$%^&*(),.?":{}|<>]/;
     if (value.length <= 8) {
       setError1("Password should be at least 8 characters long");
       return false;
-    } else if (value === "") {
+    }
+    if (value === "") {
       setError1("Password cannot be left blank");
       return false;
     }
+    if (!specialCharacters.test(value)) {
+      setError("Password should contain at least one special character");
+      return false;
+    }
+
     setError1("");
     return true;
   };
@@ -52,37 +62,33 @@ const useValidation = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true)
-
+    setLoading(true);
 
     if (validateForm()) {
-      setLoading(true)
+      setLoading(true);
 
       try {
         doCreateUserWithEmailAndPassword(email, password)
-            .then(r => {
-              setLoading(false)
-              console.log("User created successfully", r);
-              doSendEmailVerification()
-              setError('');
-              setIsOpen(true)
-
-            })
-            .catch(err => {
-              setLoading(false)
-              console.log("Error creating user:", err.code);
-              setError(err.code);
-            })
-
-
-      } catch (error :any) {
+          .then((r) => {
+            setLoading(false);
+            console.log("User created successfully", r);
+            doSendEmailVerification();
+            setError("");
+            setIsOpen(true);
+          })
+          .catch((err) => {
+            setLoading(false);
+            console.log("Error creating user:", err.code);
+            setError(err.code);
+          });
+      } catch (error: any) {
         console.log("Error creating user:", error);
         setError(error.message);
-        setLoading(false)
+        setLoading(false);
       }
     } else {
       setMessage("");
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -101,7 +107,7 @@ const useValidation = () => {
     validatePassword,
     isOpen,
     loading,
-    setIsOpen
+    setIsOpen,
   };
 };
 
@@ -116,13 +122,17 @@ const SignUp: React.FC = () => {
     message,
     handleSubmit,
     isOpen,
-      setIsOpen,
-      loading
+    setIsOpen,
+    loading,
   } = useValidation();
 
   return (
     <>
-      <Modal isOpen={isOpen} children='Check your mail for Verification, Before proceeding to login' onClose={() => setIsOpen(false)}/>
+      <Modal
+        isOpen={isOpen}
+        children="Check your mail for Verification, Before proceeding to login"
+        onClose={() => setIsOpen(false)}
+      />
       <div className={style.container}>
         <div className={style.left}>
           <div className={style.mainText}>
@@ -172,7 +182,7 @@ const SignUp: React.FC = () => {
                 {error1 && <p className={style["error-message"]}> {error1}</p>}
               </div>
               <button className={style.submit} type="submit">
-                {loading ? 'loading...' : 'Sign up'}
+                {loading ? "loading..." : "Sign up"}
               </button>
               {message && <p className={style.message}>{message}</p>}
               <div>
