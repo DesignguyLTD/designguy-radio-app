@@ -52,7 +52,7 @@ function App() {
   return (
     <>
       <Router basename="/designguy-radio-app">
-          <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
@@ -72,14 +72,13 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route path="/about" element={<div>About Page</div>} />
           <Route path="/projects" element={<div>Projects Page</div>} />
           <Route path="/insights" element={<div>Insights Page</div>} />
           <Route path="/locations" element={<div>Locations Page</div>} />
         </Routes>
+        <Search />
       </Router>
-      <Search />
     </>
   );
 }

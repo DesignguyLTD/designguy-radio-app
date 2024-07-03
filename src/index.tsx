@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import {AuthProvider} from "./Contexts/authContext";
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -10,7 +11,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
       <AuthProvider>
-          <App />
+          <div className="showMobile">
+              App available only on Desktop Screens
+          </div>
+
+          <div className="showDesk">
+              <App />
+          </div>
       </AuthProvider>
   </React.StrictMode>
 );
