@@ -12,7 +12,7 @@ interface searchItem {
     type: string;
     title: string;
     url: string;
-  }
+  };
 }
 
 const Search: React.FC = () => {
@@ -21,10 +21,13 @@ const Search: React.FC = () => {
   const [searchRadio, setSearchRadio] = useState<searchItem[]>([]);
 
   const searchQuery = (query: string) => {
-    const baseUrl = "http://radio.garden/api";
     axios
-      .get(`${baseUrl}/search?q=${query}`)
-      .then((response) => console.log(response.data))
+      .get(`/search?q=${query}`)
+      .then((response) => {
+        const { hits } = response.data.hits;
+
+        setSearchRadio(hits);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -40,7 +43,7 @@ const Search: React.FC = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    searchQuery(value)
+    searchQuery(value);
     setSearchInput(value);
     if (dropdown === false) {
       setDropdown(true);
@@ -62,11 +65,13 @@ const Search: React.FC = () => {
           <FaSearch />
         </button>
       </div>
-      {dropdown && (
+      {dropdown && searchRadio.length >= 1 && (
         <ul className={styles.dropdown}>
           {searchRadio.map((item) => (
             <li className={styles.dropdownList} key={item._id}>
-              {item._source.title.replaceAll(/[0-9.]/g, "")}
+              {item._source.title
+              // .replaceAll(/[0-9.]/g, "")
+              }
             </li>
           ))}
         </ul>

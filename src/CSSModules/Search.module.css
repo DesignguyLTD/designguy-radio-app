@@ -44,17 +44,21 @@
     background: #FFFFFF;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     border-radius: 5px;
     width: 250px;
     margin-top: 10px;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .dropdownList {
-    padding: 10px 0px 10px 5px;
+    padding: 10px;
     margin: 3px 0px 3px 0px;
     border-radius: 5px;
     text-align: left;
-    width: 238px;
     background: #EDF4FD;
     color: #2B65B4;
     font-size: 14px;
