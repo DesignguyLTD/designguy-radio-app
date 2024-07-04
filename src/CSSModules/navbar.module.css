@@ -23,7 +23,6 @@
     padding: 0;
     color: grey;
     display: flex;
-    justify-content: center;
     align-items: center;
     justify-content: space-between;
   }
@@ -46,9 +45,12 @@
   
   .signCtn {
     display: flex;
-    justify-content: space-between;
     width: 200px;
+    display: flex;
+    justify-content: space-between;
+    gap: 23px;
   }
+  
   .signUp {
     padding: 10px 20px 10px 20px;
     border: 1px solid blue;
