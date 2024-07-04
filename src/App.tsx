@@ -50,35 +50,34 @@ function App() {
   }, [accessToken, isLoggedIn]);
 
   return (
-      <Router basename="/designguy-radio-app">
-        <Navbar />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="*"
-            element={
-              <div>
-                404, Go back to <Link to="/">HomePage</Link>{" "}
-              </div>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute isLoggedIn={isLoggedIn && isTokenValid}>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route path="/about" element={<div>About Page</div>} />
-          <Route path="/projects" element={<div>Projects Page</div>} />
-          <Route path="/insights" element={<div>Insights Page</div>} />
-          <Route path="/locations" element={<div>Locations Page</div>} />
-        </Routes>
-        <Search />
-      </Router>
+    <Router basename="/designguy-radio-app">
+      <Navbar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="*"
+          element={
+            <div>
+              404, Go back to <Link to="/">HomePage</Link>{" "}
+            </div>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn && isTokenValid}>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/about" element={<div>About Page</div>} />
+        <Route path="/projects" element={<div>Projects Page</div>} />
+        <Route path="/insights" element={<div>Insights Page</div>} />
+        <Route path="/locations" element={<div>Locations Page</div>} />
+      </Routes>
+      <Search />
+    </Router>
   );
 }
 
