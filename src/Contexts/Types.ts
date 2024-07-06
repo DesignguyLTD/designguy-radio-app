@@ -1,9 +1,13 @@
 interface Response {
   took: number;
+  hits: Hitswrapper;
+  query?: string;
+  version?: string;
+  apiVersion?: number;
+}
+
+interface Hitswrapper {
   hits: Hits[];
-  query: string;
-  version: string;
-  apiVersion: number;
 }
 
 interface Hits {
@@ -14,12 +18,12 @@ interface Hits {
 
 interface Source {
   code: string;
-  stream: string;
+  stream?: string;
   subtitle: string;
   type: string;
   title: string;
-  secure: boolean;
+  secure?: boolean;
   url: string;
 }
 
-export type { Response, Hits, Source };
+export type { Response, Hitswrapper, Hits, Source };

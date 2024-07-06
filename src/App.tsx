@@ -1,4 +1,5 @@
 import { useContext, useMemo } from "react";
+
 import { AuthContext } from "./Contexts/authContext";
 import {
   Route,
@@ -13,6 +14,8 @@ import Player from "./Pages/player";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import Navbar from "./Components/navbar/Navbar";
+import Radio from "./Components/Radio";
+import RadioPlayer from "./playground/play";
 import "./App.css";
 
 console.log = function no_console() {};
@@ -76,6 +79,17 @@ function App() {
         <Route path="/insights" element={<div>Insights Page</div>} />
         <Route path="/locations" element={<div>Locations Page</div>} />
         <Route path="/player" element={<Player />} />
+        <Route path="/play" element={<Radio />} />
+        <Route
+          path="/test"
+          element={
+            <RadioPlayer
+              streamUrl={
+                "http://radio.garden/api/ara/content/listen/MXOK6VOX/channel.mp3"
+              }
+            />
+          }
+        />
       </Routes>
     </Router>
   );
