@@ -9,9 +9,9 @@ import {
 } from "react-router-dom";
 
 import Home from "./Pages/home";
+import Player from "./Pages/player";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
-import Search from "./Components/Search";
 import Navbar from "./Components/navbar/Navbar";
 import "./App.css";
 
@@ -75,8 +75,8 @@ function App() {
         <Route path="/projects" element={<div>Projects Page</div>} />
         <Route path="/insights" element={<div>Insights Page</div>} />
         <Route path="/locations" element={<div>Locations Page</div>} />
+        <Route path="/player" element={<Player />} />
       </Routes>
-      <Search />
     </Router>
   );
 }

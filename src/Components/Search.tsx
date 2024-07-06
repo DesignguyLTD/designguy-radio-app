@@ -15,7 +15,7 @@ interface searchItem {
   };
 }
 
-const Search: React.FC = () => {
+function Search({ handleStationClick } : { handleStationClick: (params: searchItem) => void}) {
   const [dropdown, setDropdown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchRadio, setSearchRadio] = useState<searchItem[]>([]);
@@ -68,7 +68,7 @@ const Search: React.FC = () => {
       {dropdown && searchRadio.length >= 1 && (
         <ul className={styles.dropdown}>
           {searchRadio.map((item) => (
-            <li className={styles.dropdownList} key={item._id}>
+            <li className={styles.dropdownList} key={item._id} onClick={() => handleStationClick(item)}>
               {item._source.title
               // .replaceAll(/[0-9.]/g, "")
               }
