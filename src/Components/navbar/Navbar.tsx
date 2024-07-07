@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
       <div>
         <p className={styles.p}>DesignGuy Radio</p>
       </div>
-    <ul className={styles.ul}>
+      <ul className={styles.ul}>
         <li className={styles.li}>
           <NavLink
             to="/about"

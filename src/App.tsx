@@ -74,12 +74,12 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/about" element={<div>About Page</div>} />
-        <Route path="/projects" element={<div>Projects Page</div>} />
-        <Route path="/insights" element={<div>Insights Page</div>} />
-        <Route path="/locations" element={<div>Locations Page</div>} />
+        <Route path="/about" element={<Player />} />
+        <Route path="/projects" element={<Player />} />
+        <Route path="/insights" element={<Player />} />
+        <Route path="/locations" element={<Player />} />
         <Route path="/player" element={<Player />} />
-        <Route path="/play" element={<Radio />} />
+        <Route path="/play" element={<Radio />} /> 
         <Route
           path="/test"
           element={

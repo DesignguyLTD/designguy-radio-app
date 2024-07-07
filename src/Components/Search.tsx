@@ -1,24 +1,15 @@
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useContext } from "react";
+import { PlayerContext } from  "../Contexts/playerContext";
 import styles from "../CSSModules/Search.module.css";
 import { FaSearch } from "react-icons/fa";
+import { playerInterface } from "../interface";
 import axios from "axios";
 
-interface searchItem {
-  _id: string;
-  _score: number;
-  _source: {
-    code: string;
-    subtitle: string;
-    type: string;
-    title: string;
-    url: string;
-  };
-}
-
-function Search({ handleStationClick } : { handleStationClick: (params: searchItem) => void}) {
+function Search() {
+  const {setStation} = useContext(PlayerContext)
   const [dropdown, setDropdown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [searchRadio, setSearchRadio] = useState<searchItem[]>([]);
+  const [searchRadio, setSearchRadio] = useState<playerInterface[]>([]);
 
   const searchQuery = (query: string) => {
     axios
@@ -43,13 +34,22 @@ function Search({ handleStationClick } : { handleStationClick: (params: searchIt
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    searchQuery(value);
     setSearchInput(value);
-    if (dropdown === false) {
-      setDropdown(true);
+
+    if (value.trim() === "") {
+      setDropdown(false);
+      return;
     }
+
+    searchQuery(value);
+    setDropdown(true);
   };
 
+  const hanndleItemClick = (item: playerInterface) => {
+    setSearchInput(item._source.title);
+    setDropdown(false);
+    setStation(item);
+  }
   return (
     <div className={styles.searchCtn}>
       <div className={styles.inputBtnCtn}>
@@ -57,8 +57,10 @@ function Search({ handleStationClick } : { handleStationClick: (params: searchIt
           type="text"
           placeholder="Search countries, places and radio stations"
           className={styles.textInput}
+          value={searchInput}
           // onBlur={handleBlur}
           onChange={handleChange}
+          onInput={handleChange}
           // onFocus={handleFocus}
         />
         <button type="submit" className={styles.btn}>
@@ -67,8 +69,10 @@ function Search({ handleStationClick } : { handleStationClick: (params: searchIt
       </div>
       {dropdown && searchRadio.length >= 1 && (
         <ul className={styles.dropdown}>
-          {searchRadio.map((item) => (
-            <li className={styles.dropdownList} key={item._id} onClick={() => handleStationClick(item)}>
+          {searchRadio.map((item: playerInterface) => (
+            <li className={styles.dropdownList} key={item._id} onClick={() => {
+              hanndleItemClick(item)
+              }}>
               {item._source.title
               // .replaceAll(/[0-9.]/g, "")
               }
