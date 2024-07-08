@@ -8,15 +8,15 @@ import { PlayerContext } from "../Contexts/playerContext";
 function Home() {
   let BASEURL = "https://radio.garden/api/ara/content/listen/";
   const [station, setStation] = useState<playerInterface>({
-    _id: "string",
+    _id: "",
     _score: 0,
     _source: {
-      code: "string",
-      subtitle: "string",
-      type: "string",
-      title: "string",
-      stream: "string",
-      url: "string",
+      code: "",
+      subtitle: "",
+      type: "",
+      title: "",
+      stream: "",
+      url: "",
     },
   });
 
