@@ -1,75 +1,59 @@
-import React from "react";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
 import styles from "../../CSSModules/navbar.module.css";
-import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../Contexts/authContext";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+  const authContext = useContext(AuthContext);
+
+  const handleLogout = () => {
+    authContext?.logout();
+  };
+
+  const navigationLinks = [
+    { name: "About", href: "/about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Insights", href: "/insights" },
+    { name: "Locations", href: "/locations" },
+  ];
+
   return (
     <nav className={styles.navbar}>
       <div>
         <p className={styles.p}>DesignGuy Radio</p>
       </div>
+
       <ul className={styles.ul}>
-        <li className={styles.li}>
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.activeLink}` : styles.link
-            }
-          >
-            About
-          </NavLink>
-        </li>
-        <li className={styles.li}>
-          <NavLink
-            to="/projects"
-            className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.activeLink}` : styles.link
-            }
-          >
-            Projects
-          </NavLink>
-        </li>
-        <li className={styles.li}>
-          <NavLink
-            to="/insights"
-            className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.activeLink}` : styles.link
-            }
-          >
-            Insights
-          </NavLink>
-        </li>
-        <li className={styles.li}>
-          <NavLink
-            to="/locations"
-            className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.activeLink}` : styles.link
-            }
-          >
-            Locations
-          </NavLink>
-        </li>
+        {navigationLinks.map((navigations) => (
+          <li className={styles.li} key={navigations.name}>
+            <NavLink
+              to={navigations.href}
+              className={({ isActive }) =>
+                isActive ? `${styles.link} ${styles.activeLink}` : styles.link
+              }
+            >
+              {navigations.name}
+            </NavLink>
+          </li>
+        ))}
       </ul>
+
       <ul className={styles.signCtn}>
         <li>
-          <NavLink to="/login">
-            <input
-              type="button"
-              value="Sign In"
-            // onClick={() => alert("You are about to Sign in")}
-              className={styles.signIn}
-            />
-          </NavLink>
+          {authContext?.isLoggedIn ? (
+            <div onClick={handleLogout} className={styles.signIn}>
+              Logout
+            </div>
+          ) : (
+            <Link className={styles.signIn} to="login">
+              Login
+            </Link>
+          )}
         </li>
         <li>
-          <NavLink to="/signUp">
-            <input
-              type="button"
-              value="Sign Up"
-             // onClick={() => alert("You are about to Sign Up")}
-              className={styles.signUp}
-            />
-          </NavLink>
+          <Link to="/signUp" className={styles.signUp}>
+            Sign Up
+          </Link>
         </li>
       </ul>
     </nav>

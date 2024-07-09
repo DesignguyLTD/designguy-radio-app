@@ -1,7 +1,7 @@
 import 'react-h5-audio-player/lib/styles.css';
 import AudioPlayer from 'react-h5-audio-player';
 // src/RadioPlayer.tsx
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { PlayerContext } from '../Contexts/playerContext';
 
 
@@ -13,11 +13,13 @@ const RadioPlayer: React.FC<RadioPlayerProps> = ({ streamUrl }) => {
     const {station} = useContext(PlayerContext);
 
     return (
-        <div style={{width: '50%', margin: '300px auto 0px'}}>
-             <div>
-                  <div>{station?._source.title}</div>
+        <div style={{width: '50%', margin: '100px auto 0px'}}>
+            {station._id !== "" &&
+             <div className="station">
+                  <div className="station_title">{station?._source.title}</div>
                   <div>{station?._source.subtitle}</div>
-                </div>
+              </div>
+            }
             <AudioPlayer
                 autoPlay
                 src={streamUrl}

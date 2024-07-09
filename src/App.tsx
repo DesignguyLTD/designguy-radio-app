@@ -7,14 +7,14 @@ import {
   Routes,
   Navigate,
   Link,
+  Outlet,
 } from "react-router-dom";
 
 import Home from "./Pages/home";
-import Player from "./Pages/player";
+import Radio from "./Components/Radio";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import Navbar from "./Components/navbar/Navbar";
-import Radio from "./Components/Radio";
 import RadioPlayer from "./playground/play";
 import "./App.css";
 
@@ -54,7 +54,6 @@ function App() {
 
   return (
     <Router basename="/designguy-radio-app">
-      <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
@@ -70,26 +69,28 @@ function App() {
           path="/"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn && isTokenValid}>
-              <Home />
+              <Navbar />
+              <Outlet />
             </ProtectedRoute>
           }
-        />
-        <Route path="/about" element={<Player />} />
-        <Route path="/projects" element={<Player />} />
-        <Route path="/insights" element={<Player />} />
-        <Route path="/locations" element={<Player />} />
-        <Route path="/player" element={<Player />} />
-        <Route path="/play" element={<Radio />} /> 
-        <Route
-          path="/test"
-          element={
-            <RadioPlayer
-              streamUrl={
-                "http://radio.garden/api/ara/content/listen/MXOK6VOX/channel.mp3"
-              }
-            />
-          }
-        />
+        >
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<Home />} />
+          <Route path="/projects" element={<Home />} />
+          <Route path="/insights" element={<Home />} />
+          <Route path="/locations" element={<Home />} />
+          <Route path="/play" element={<Radio />} />
+          <Route
+            path="/test"
+            element={
+              <RadioPlayer
+                streamUrl={
+                  "http://radio.garden/api/ara/content/listen/MXOK6VOX/channel.mp3"
+                }
+              />
+            }
+          />
+        </Route>
       </Routes>
     </Router>
   );
