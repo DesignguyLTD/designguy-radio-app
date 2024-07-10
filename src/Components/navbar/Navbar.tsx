@@ -10,12 +10,12 @@ const Navbar = () => {
     authContext?.logout();
   };
 
-  const navigationLinks = [
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Insights", href: "/insights" },
-    { name: "Locations", href: "/locations" },
-  ];
+  // const navigationLinks = [
+  //   { name: "About", href: "/about" },
+  //   { name: "Projects", href: "/projects" },
+  //   { name: "Insights", href: "/insights" },
+  //   { name: "Locations", href: "/locations" },
+  // ];
 
   return (
     <nav className={styles.navbar}>
@@ -23,7 +23,7 @@ const Navbar = () => {
         <p className={styles.p}>DesignGuy Radio</p>
       </div>
 
-      <ul className={styles.ul}>
+      {/* <ul className={styles.ul}>
         {navigationLinks.map((navigations) => (
           <li className={styles.li} key={navigations.name}>
             <NavLink
@@ -36,7 +36,7 @@ const Navbar = () => {
             </NavLink>
           </li>
         ))}
-      </ul>
+      </ul> */}
 
       <ul className={styles.signCtn}>
         <li>

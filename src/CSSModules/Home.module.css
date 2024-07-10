@@ -3,7 +3,7 @@
 .main_pg {
     background: linear-gradient(100deg, #02083C, #0A157A);
     padding: 4rem 2rem;
-    
+    height: 100vh;
 }
 
 h1 {
