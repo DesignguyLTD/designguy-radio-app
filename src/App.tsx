@@ -51,6 +51,7 @@ function App() {
   }, [accessToken, isLoggedIn]);
 
   return (
+
       <>
         <Navbar/>
         <Router basename="/designguy-radio-app">
@@ -73,12 +74,7 @@ function App() {
                   </ProtectedRoute>
                 }
             >
-              {/*<Route path="/" element={<Home />} />*/}
-              {/*<Route path="/about" element={<Home />} />*/}
-              {/*<Route path="/projects" element={<Home />} />*/}
-              {/*<Route path="/insights" element={<Home />} />*/}
-              {/*<Route path="/locations" element={<Home />} />*/}
-              {/*<Route path="/play" element={<Radio />} />*/}
+
               <Route
                   path="/test"
                   element={
