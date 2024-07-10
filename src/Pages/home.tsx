@@ -26,8 +26,9 @@ function Home() {
     const stream = station?._source.stream;
     const url = station?._source.url;
     const id = url?.split("/").pop(); // Extract the ID from the URL
-    const fullUrl = stream ? stream : `${BASEURL}${id}/channel.mp3`; // Construct the new URL
+    const fullUrl = stream ?  `${BASEURL}${id}/channel.mp3` : stream; // Construct the new URL
     setCurrentUrl(fullUrl);
+    console.log(station,fullUrl, 'links')
   }, [station, BASEURL]);
 
   return (

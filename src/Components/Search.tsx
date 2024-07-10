@@ -13,7 +13,7 @@ function Search() {
 
   const searchQuery = (query: string) => {
     axios
-      .get(`/search?q=${query}`)
+      .get(`https://radio.garden/api/search?q=${query}`)
       .then((response) => {
         const { hits } = response.data.hits;
 

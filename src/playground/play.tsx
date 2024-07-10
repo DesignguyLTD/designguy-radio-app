@@ -12,6 +12,8 @@ interface RadioPlayerProps {
 const RadioPlayer: React.FC<RadioPlayerProps> = ({ streamUrl }) => {
     const {station} = useContext(PlayerContext);
 
+    console.log(streamUrl, 'playcomp')
+
     return (
         <div style={{width: '50%', margin: '100px auto 0px'}}>
             {station._id !== "" &&

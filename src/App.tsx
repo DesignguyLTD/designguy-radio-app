@@ -2,12 +2,10 @@ import { useContext, useMemo } from "react";
 
 import { AuthContext } from "./Contexts/authContext";
 import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-  Navigate,
-  Link,
-  Outlet,
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    Navigate, Link,
 } from "react-router-dom";
 
 import Home from "./Pages/home";
@@ -18,7 +16,7 @@ import Navbar from "./Components/navbar/Navbar";
 import RadioPlayer from "./playground/play";
 import "./App.css";
 
-console.log = function no_console() {};
+// console.log = function no_console() {};
 
 const ProtectedRoute = ({
   isLoggedIn,
@@ -53,46 +51,48 @@ function App() {
   }, [accessToken, isLoggedIn]);
 
   return (
-    <Router basename="/designguy-radio-app">
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route
-          path="*"
-          element={
-            <div>
-              404, Go back to <Link to="/">HomePage</Link>{" "}
-            </div>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn && isTokenValid}>
-              <Navbar />
-              <Outlet />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<Home />} />
-          <Route path="/projects" element={<Home />} />
-          <Route path="/insights" element={<Home />} />
-          <Route path="/locations" element={<Home />} />
-          <Route path="/play" element={<Radio />} />
-          <Route
-            path="/test"
-            element={
-              <RadioPlayer
-                streamUrl={
-                  "http://radio.garden/api/ara/content/listen/MXOK6VOX/channel.mp3"
+      <>
+        <Navbar/>
+        <Router basename="/designguy-radio-app">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route
+                path="*"
+                element={
+                  <div>
+                    404, Go back to <Link to="/">HomePage</Link>{" "}
+                  </div>
                 }
+            />
+            <Route
+                path="/"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn && isTokenValid}>
+                    <Home/>
+                  </ProtectedRoute>
+                }
+            >
+              {/*<Route path="/" element={<Home />} />*/}
+              {/*<Route path="/about" element={<Home />} />*/}
+              {/*<Route path="/projects" element={<Home />} />*/}
+              {/*<Route path="/insights" element={<Home />} />*/}
+              {/*<Route path="/locations" element={<Home />} />*/}
+              {/*<Route path="/play" element={<Radio />} />*/}
+              <Route
+                  path="/test"
+                  element={
+                    <RadioPlayer
+                        streamUrl={
+                          "http://radio.garden/api/ara/content/listen/MXOK6VOX/channel.mp3"
+                        }
+                    />
+                  }
               />
-            }
-          />
-        </Route>
-      </Routes>
-    </Router>
+            </Route>
+          </Routes>
+        </Router>
+      </>
   );
 }
 
