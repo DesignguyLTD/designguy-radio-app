@@ -7,11 +7,6 @@ import {
     UserCredential
 } from "firebase/auth";
 
-interface CreateUser {
-    email: string;
-    password: string;
-}
-
 export const doCreateUserWithEmailAndPassword = async (email: string, password: string): Promise<UserCredential> => {
     console.log(auth, 'auth');
     return createUserWithEmailAndPassword(auth, email, password);
