@@ -1,12 +1,15 @@
-import { ChangeEvent, useState, useContext } from "react";
-import { PlayerContext } from  "../Contexts/playerContext";
-import styles from "../CSSModules/Search.module.css";
+import { ChangeEvent, useContext, useState } from "react";
+
+import CustomRadio from "./CustomRadio";
 import { FaSearch } from "react-icons/fa";
-import { playerInterface } from "../interface";
+import RadioProvider from "./RadioProvider";
 import axios from "axios";
+import { playerInterface } from "../interface";
+import { radioContext } from "../Contexts/radioContext";
+import styles from "../CSSModules/Search.module.css";
 
 function Search() {
-  const {setStation} = useContext(PlayerContext)
+  const { setStation } = useContext(radioContext);
   const [dropdown, setDropdown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchRadio, setSearchRadio] = useState<playerInterface[]>([]);
@@ -49,7 +52,7 @@ function Search() {
     setSearchInput(item._source.title);
     setDropdown(false);
     setStation(item);
-  }
+  };
   return (
     <div className={styles.searchCtn}>
       <div className={styles.inputBtnCtn}>
@@ -70,18 +73,23 @@ function Search() {
       {dropdown && searchRadio.length >= 1 && (
         <ul className={styles.dropdown}>
           {searchRadio.map((item: playerInterface) => (
-            <li className={styles.dropdownList} key={item._id} onClick={() => {
-              hanndleItemClick(item)
+            <div
+              className={styles.dropdownList}
+              key={item._id}
+              onClick={() => {
+                hanndleItemClick(item);
               }}>
-              {item._source.title
-              // .replaceAll(/[0-9.]/g, "")
+              {
+                item._source.title
+
+                // .replaceAll(/[0-9.]/g, "")
               }
-            </li>
+            </div>
           ))}
         </ul>
       )}
     </div>
   );
-};
+}
 
 export default Search;
